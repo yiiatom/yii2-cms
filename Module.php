@@ -19,26 +19,25 @@ class Module extends \yii\base\Module
         $is_console = Yii::$app instanceof \yii\console\Application;
 
         // Modules
-        var_dump($this->modules); die();
-        $modules = [];
-        foreach (glob(Yii::getAlias('@app/modules') . '/*') as $dir) {
-            if (file_exists("{$dir}/BackendModule.php")) {
-                $name = basename($dir);
-                $module = ['class' => "app\\modules\\{$name}\\BackendModule"];
-                if ($is_console) {
-                    $module['controllerNamespace'] = "app\\modules\\{$name}\\commands";
-                }
-                $modules[$name] = $module;
-            }
-        }
-        $this->modules = $modules;
+        // $modules = [];
+        // foreach (glob(Yii::getAlias('@app/modules') . '/*') as $dir) {
+        //     if (file_exists("{$dir}/BackendModule.php")) {
+        //         $name = basename($dir);
+        //         $module = ['class' => "app\\modules\\{$name}\\BackendModule"];
+        //         if ($is_console) {
+        //             $module['controllerNamespace'] = "app\\modules\\{$name}\\commands";
+        //         }
+        //         $modules[$name] = $module;
+        //     }
+        // }
+        // $this->modules = $modules;
 
         // Application
         if (!$is_console) {
             Yii::$app->name = 'Atom';
-            Yii::$app->homeUrl = ['/cms/default/index'];
-            Yii::$app->errorHandler->errorAction = '/cms/default/error';
-            Yii::$app->user->loginUrl = ['/cms/account/login'];
+            Yii::$app->homeUrl = ["/{$this->id}/default/index"];
+            Yii::$app->errorHandler->errorAction = "/{$this->id}/default/error";
+            Yii::$app->user->loginUrl = ["/{$this->id}/account/login"];
         }
     }
 
@@ -48,12 +47,17 @@ class Module extends \yii\base\Module
             [
                 'icon' => '<i class="menu-icon fa-solid fa-gauge-high"></i>',
                 'label' => 'Dashboard',
-                'url' => ['/cms/default/index'],
+                'url' => ["/{$this->id}/default/index"],
+            ],
+            [
+                'icon' => '<i class="menu-icon fa-solid fa-user"></i>',
+                'label' => 'Users',
+                'url' => ["/{$this->id}/user/index"],
             ],
             [
                 'icon' => '<i class="menu-icon fa-solid fa-envelope"></i>',
                 'label' => 'Notifications',
-                'url' => ['/cms/notification/index'],
+                'url' => ["/{$this->id}/notification/index"],
             ],
             // [
             //     'icon' => '<i class="menu-icon fa-solid fa-images"></i>',
@@ -79,7 +83,7 @@ class Module extends \yii\base\Module
 
         foreach ($this->modules as $id => $config) {
             if ($module = $this->getModule($id)) {
-                $module->menu($items, "/cms/{$id}");
+                $module->menu($items, "/{$this->id}/{$id}");
             }
         }
 
@@ -87,8 +91,8 @@ class Module extends \yii\base\Module
         foreach ($items as $item) {
             $menuItem = [
                 'encode' => false,
-                'label' => isset($item['icon']) ? $item['icon'] : '<i class="menu-icon"></i>',
-                'url' => isset($item['url']) ? $item['url'] : '#',
+                'label' => $item['icon'] ?? '<i class="menu-icon"></i>',
+                'url' => $item['url'] ?? '#',
             ];
             if (isset($item['label'])) {
                 $menuItem['label'] .= Html::tag('span', $item['label']);
