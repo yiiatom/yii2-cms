@@ -1,0 +1,21 @@
+.ui-autocomplete {
+	border: 1px solid rgba($color-black, 0.15);
+	border-radius: ($spacer * 0.25);
+	color: $color-text;
+	font-family: inherit;
+	font-size: inherit;
+	padding: ($spacer * 0.5) 0;
+	z-index: 1050;
+
+	.ui-menu-item-wrapper {
+		padding: ($spacer * 0.25) ($spacer * 1.5);
+	}
+
+	.ui-state-active {
+		background: none;
+		background-color: $color-primary;
+		border: 0;
+		color: $color-white;
+		margin: 0;
+	}
+}

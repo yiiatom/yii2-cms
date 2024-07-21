@@ -1,0 +1,190 @@
+$sidebar-color-link: $color-primary;
+$sidebar-color-link-active: lighten($sidebar-color-link, 15%);
+
+.sidebar-wrapper {
+    background-color: $color-dark;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    width: 100%;
+    z-index: 10;
+
+    .sidebar-header {
+        border-bottom: 1px solid rgba($color-white, 0.1);
+        display: flex;
+        padding: ($spacer * 0.5) ($gap * 0.5);
+
+        .sidebar-brand {
+            align-items: center;
+            color: $color-white;
+            display: inline-flex;
+            font-size: ($font-size-base * 1.25);
+            margin-right: $spacer;
+            text-decoration: none;
+            white-space: nowrap;
+
+            &::before {
+                background-image: url("../images/logo.png");
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: 24px 24px;
+                content: "";
+                flex: 0 0 24px;
+                height: 24px;
+                margin-right: ($spacer * 0.5);
+                width: 24px;
+            }
+        }
+
+        .sidebar-toggle {
+            box-shadow: none;
+            color: $color-white;
+            margin-left: auto;
+        }
+    }
+
+    .sidebar-user {
+        align-items: center;
+        border-top: 1px solid rgba($color-white, 0.1);
+        display: none;
+        margin-top: auto;
+        padding: ($spacer * 0.5) ($gap * 0.5);
+
+        .user-image {
+            background-color: rgba($color-white, 0.1);
+            border-radius: 4px;
+            height: 40px;
+            margin-right: ($spacer * 0.5);
+            width: 40px;
+        }
+
+        .user-name {
+            color: $color-light;
+        }
+
+        .user-links {
+            font-size: ($font-size-base * 0.875);
+
+            a {
+                margin-right: ($spacer * 0.5);
+            }
+
+            a:hover {
+                color: $sidebar-color-link-active;
+            }
+        }
+    }
+
+    .sidebar-menu {
+        display: none;
+        padding: ($spacer * 0.5) 0;
+
+        a {
+            color: $color-light;
+            display: block;
+            text-decoration: none;
+        }
+
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        > ul > li {
+            > a {
+                padding: ($spacer * 0.125) ($gap * 0.5);
+                position: relative;
+
+                .menu-icon {
+                    display: inline-block;
+                    width: 26px;
+                }
+            }
+
+            &.active > a,
+            > a:hover {
+                color: $color-white;
+
+                .menu-icon {
+                    color: $sidebar-color-link-active;
+                }
+            }
+        }
+
+        .sidebar-dropdown {
+            > a::after {
+                border-bottom: 2px solid $color-light;
+                border-right: 2px solid $color-light;
+                content: "";
+                height: 10px;
+                margin-top: -5px;
+                position: absolute;
+                right: 15px;
+                top: 50%;
+                transform: rotate(-45deg);
+                width: 10px;
+            }
+
+            > ul {
+                background-color: rgba($color-white, 0.05);
+                display: none;
+                padding: ($spacer * 0.25) 0;
+
+                > li {
+                    > a {
+                        padding-left: ($gap * 0.5) + 40px;
+                        padding-right: ($gap * 0.5);
+                        position: relative;
+                    }
+
+                    &.active > a,
+                    > a:hover {
+                        color: $color-white;
+                    }
+                }
+            }
+
+            &.open {
+                > a::after {
+                    transform: rotate(45deg);
+                }
+
+                > ul {
+                    display: block;
+                }
+            }
+        }
+    }
+
+    &.open {
+        height: 100%;
+
+        .sidebar-user {
+            display: flex;
+        }
+
+        .sidebar-menu {
+            display: block;
+        }
+    }
+
+    @media (min-width: 768px) {
+        height: 100%;
+        width: $sidebar-width;
+
+        .sidebar-header {
+            .sidebar-toggle {
+                display: none;
+            }
+        }
+
+        .sidebar-user {
+            display: flex;
+        }
+
+        .sidebar-menu {
+            display: block;
+        }
+    }
+}
