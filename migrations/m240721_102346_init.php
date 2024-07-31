@@ -19,10 +19,11 @@ class m240721_102346_init extends Migration
             'active' => $this->boolean()->notNull()->defaultValue(1),
             'email' => $this->string(200)->defaultValue(null),
             'password' => $this->string(64)->defaultValue(null),
-            'passwordExpire' => $this->dateTime()->defaultValue(null),
+            'passwordExpireAt' => $this->dateTime()->defaultValue(null),
             'accessToken' => $this->string(64)->defaultValue(null),
             'authKey' => $this->string(64)->defaultValue(null),
-            'displayName' => $this->string(100)->notNull(),
+            'lastName' => $this->string(100)->defaultValue(null),
+            'firstName' => $this->string(100)->defaultValue(null),
             'createdAt' => $this->dateTime()->defaultValue(null),
             'modifiedAt' => $this->dateTime()->defaultValue(null),
         ]);
@@ -35,14 +36,14 @@ class m240721_102346_init extends Migration
         $this->insert('user', [
             'username' => 'admin',
             'password' => Yii::$app->security->generatePasswordHash('admin'),
-            'passwordExpire' => gmdate('Y-m-d H:i:s'),
-            'displayName' => 'Admin',
+            'passwordExpireAt' => gmdate('Y-m-d H:i:s'),
+            'lastName' => 'Admin',
         ]);
         $id = Yii::$app->db->getLastInsertID();
         $auth = Yii::$app->authManager;
-        $admin = $auth->createRole('admin');
-        $auth->add($admin);
-        $auth->assign($admin, $id);
+        $role = $auth->createRole('Admin');
+        $auth->add($role);
+        $auth->assign($role, $id);
 
         // Notifications
         $this->createTable('notification', [
@@ -78,6 +79,9 @@ class m240721_102346_init extends Migration
             'user',
         );
         $this->dropTable('user');
+        $auth = Yii::$app->authManager;
+        $role = $auth->getRole('Admin');
+        $auth->remove($role);
     }
 
     /*

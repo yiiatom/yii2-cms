@@ -48,22 +48,32 @@ $sidebar-color-link-active: lighten($sidebar-color-link, 15%);
         border-top: 1px solid rgba($color-white, 0.1);
         display: none;
         margin-top: auto;
-        padding: ($spacer * 0.5) ($gap * 0.5);
+        padding: $spacer ($gap * 0.5);
 
         .user-image {
+            align-items: center;
             background-color: rgba($color-white, 0.1);
             border-radius: 4px;
+            display: flex;
             height: 40px;
+            justify-content: center;
             margin-right: ($spacer * 0.5);
             width: 40px;
+
+            i {
+                color: $color-light;
+                font-size: 24px;
+            }
         }
 
         .user-name {
             color: $color-light;
+            line-height: 20px;
         }
 
         .user-links {
             font-size: ($font-size-base * 0.875);
+            line-height: 20px;
 
             a {
                 margin-right: ($spacer * 0.5);

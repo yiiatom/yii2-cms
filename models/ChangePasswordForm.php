@@ -38,6 +38,7 @@ class ChangePasswordForm extends Model
         if ($this->validate()) {
             $user = $this->getUser();
             $user->setPassword($this->newPassword);
+            $user->passwordExpireAt = null;
             return $user->save(false);
         }
         return false;

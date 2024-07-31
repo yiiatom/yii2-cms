@@ -23,7 +23,7 @@ class AccountController extends BackendController
                     ],
                     [
                         'allow' => true,
-                        'roles' => ['admin'],
+                        'roles' => ['Admin'],
                     ],
                 ],
             ],
@@ -59,9 +59,10 @@ class AccountController extends BackendController
     public function actionChangePassword()
     {
         $model = new ChangePasswordForm;
+        $isPasswordExpired = $model->getUser()->isPasswordExpired();
         if ($model->load(Yii::$app->request->post()) && $model->process()) {
             Yii::$app->session->setFlash('success', 'Password updated successfully.');
-            return $this->goHome();
+            return $isPasswordExpired ? $this->goBack() : $this->goHome();
         }
 
         return $this->render('change-password', [

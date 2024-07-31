@@ -31,7 +31,7 @@ AppAsset::register($this);
         <?= Menu::widget(['items' => \atom\cms\Module::getInstance()->getMenuItems()]); ?>
     </div>
     <div class="sidebar-user">
-        <div class="user-image"></div>
+        <div class="user-image"><i class="fa-solid fa-user"></i></div>
         <div class="user-content">
             <div class="user-name"><?= Html::encode(Yii::$app->user->identity->displayName); ?></div>
             <div class="user-links">

@@ -12,7 +12,6 @@
     ],
     "require": {
         "yiisoft/yii2": "*",
-        "fortawesome/font-awesome": "*",
         "yiiatom/yii2-core": "*"
     },
     "autoload": {
