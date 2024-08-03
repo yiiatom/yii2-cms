@@ -8,7 +8,7 @@ $this->title = 'Users';
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
-<h1><?= Html::encode($this->title); ?></h1>
+<h1><?= Html::encode($this->title) ?></h1>
 <div class="mb-3">
     <?= Html::a('Create', ['create'], ['class' => 'btn btn-primary']) ?>
 </div>
@@ -34,7 +34,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'email',
         [
             'class' => 'atom\grid\ActionColumn',
-            'template' => '{update}',
+            'template' => '{update} {password}',
+            'buttons' => [
+                'password' => function($url, $model, $key) {
+                    return Html::a('<i class="fa-solid fa-lock"></i>', $url, ['title' => 'Change password']);
+                },
+            ],
         ],
     ],
 ]); ?>
