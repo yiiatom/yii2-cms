@@ -62,6 +62,11 @@ class Module extends \yii\base\Module
             return;
         }
 
+        // Skip checking for guest
+        if ($user->getIsGuest()) {
+            return;
+        }
+
         // Check
         if ($user->getIdentity()->isPasswordExpired()) {
             $request = Yii::$app->getRequest();
