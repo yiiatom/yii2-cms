@@ -36,6 +36,7 @@ class Module extends \yii\base\Module
         // Application
         if (!$isConsole) {
             $this->initApplication();
+            $this->initMediaLibrary();
             $this->checkPasswordExpired();
         }
     }
@@ -46,6 +47,16 @@ class Module extends \yii\base\Module
         Yii::$app->homeUrl = ["/{$this->id}/default/index"];
         Yii::$app->errorHandler->errorAction = "/{$this->id}/default/error";
         Yii::$app->getUser()->loginUrl = ["/{$this->id}/account/login"];
+    }
+
+    private function initMediaLibrary(): void
+    {
+        $path = Yii::getAlias('@webroot/public');
+        if (!file_exists($path) || !is_dir($path)) {
+            if (!@mkdir($path)) {
+                Yii::$app->session->setFlash('warning', 'Unable to create "' . $path . '" directory.');
+            }
+        }
     }
 
     private function checkPasswordExpired(): void
@@ -102,6 +113,11 @@ class Module extends \yii\base\Module
                 'url' => ["/{$this->id}/default/index"],
             ],
             [
+                'icon' => '<i class="menu-icon fa-solid fa-images"></i>',
+                'label' => 'Media library',
+                'url' => ["/{$this->id}/media-library/index"],
+            ],
+            [
                 'icon' => '<i class="menu-icon fa-solid fa-user"></i>',
                 'label' => 'Users',
                 'url' => ["/{$this->id}/user/index"],
@@ -111,11 +127,6 @@ class Module extends \yii\base\Module
                 'label' => 'Notifications',
                 'url' => ["/{$this->id}/notification/index"],
             ],
-            // [
-            //     'icon' => '<i class="menu-icon fa-solid fa-images"></i>',
-            //     'label' => 'Media library',
-            //     'url' => '#',
-            // ],
             // [
             //     'icon' => '<i class="menu-icon fa-solid fa-puzzle-piece"></i>',
             //     'label' => 'Modules',
