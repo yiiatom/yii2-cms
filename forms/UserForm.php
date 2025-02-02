@@ -1,8 +1,9 @@
 <?php
 
-namespace atom\cms\models;
+namespace atom\cms\forms;
 
 use Yii;
+use atom\cms\models\User;
 use yii\base\Model;
 
 class UserForm extends Model

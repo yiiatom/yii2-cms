@@ -3,8 +3,8 @@
 namespace atom\cms\models;
 
 use Yii;
-use atom\db\ActiveRecord;
 use yii\data\ActiveDataProvider;
+use yii\db\ActiveRecord;
 use yii\db\ActiveQueryInterface;
 
 class User extends ActiveRecord implements \yii\web\IdentityInterface
@@ -77,16 +77,5 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
     public function isPasswordExpired(): bool
     {
         return $this->passwordExpireAt && ($this->passwordExpireAt < gmdate('Y-m-d H:i:s'));
-    }
-
-    public function getDataProvider($config = [], $hideAdmin = false)
-    {
-        if (!isset($config['query'])) {
-            $config['query'] = static::find();
-        }
-        if ($hideAdmin) {
-            $config['query']->andWhere(['<>', 'username', 'admin']);
-        }
-        return new ActiveDataProvider($config);
     }
 }

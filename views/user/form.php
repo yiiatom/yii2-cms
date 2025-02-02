@@ -1,7 +1,7 @@
 <?php
 
 use atom\bootstrap\ActiveForm;
-use atom\cms\models\UserForm;
+use atom\cms\forms\UserForm;
 use yii\helpers\Html;
 
 ?>

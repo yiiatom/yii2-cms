@@ -4,7 +4,7 @@ namespace atom\cms\controllers;
 
 use Yii;
 use atom\BackendController;
-use atom\cms\models\MediaLibraryForm;
+use atom\cms\forms\MediaLibraryForm;
 use yii\helpers\Html;
 use yii\web\BadRequestHttpException;
 use yii\web\UploadedFile;

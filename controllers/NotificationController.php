@@ -3,15 +3,15 @@
 namespace atom\cms\controllers;
 
 use atom\BackendController;
-use atom\cms\models\Notification;
+use atom\cms\filters\NotificationFilter;
 
 class NotificationController extends BackendController
 {
     public function actionIndex()
     {
-        $model = new Notification;
+        $filter = new NotificationFilter;
         return $this->render('index', [
-            'model' => $model,
+            'filter' => $filter,
         ]);
     }
 }

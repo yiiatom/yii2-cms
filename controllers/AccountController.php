@@ -4,8 +4,8 @@ namespace atom\cms\controllers;
 
 use Yii;
 use atom\BackendController;
-use atom\cms\models\ChangePasswordForm;
-use atom\cms\models\LoginForm;
+use atom\cms\forms\ChangePasswordForm;
+use atom\cms\forms\LoginForm;
 use yii\filters\AccessControl;
 
 class AccountController extends BackendController

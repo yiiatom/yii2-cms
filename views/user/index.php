@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= Html::a('Create', ['create'], ['class' => 'btn btn-primary']) ?>
 </div>
 <?= GridView::widget([
-    'dataProvider' => $model->getDataProvider([], true),
+    'dataProvider' => $filter->getDataProvider([], true),
     'rowOptions' => function($model) {
         $options = [];
         if (!$model->active) {

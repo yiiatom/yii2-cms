@@ -1,6 +1,6 @@
 <?php
 
-namespace atom\cms\models;
+namespace atom\cms\forms;
 
 use Yii;
 use yii\base\Model;

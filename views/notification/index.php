@@ -10,7 +10,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <h1><?= Html::encode($this->title); ?></h1>
 <?= GridView::widget([
-    'dataProvider' => $model->getDataProvider(),
+    'dataProvider' => $filter->getDataProvider(),
     'rowOptions' => function($model) {
         $class = '';
         if ($model->type == Notification::TYPE_INFO) {

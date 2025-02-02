@@ -2,7 +2,7 @@
 
 namespace atom\cms\models;
 
-use atom\db\ActiveRecord;
+use yii\db\ActiveRecord;
 
 class Notification extends ActiveRecord
 {

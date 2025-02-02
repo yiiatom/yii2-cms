@@ -1,7 +1,8 @@
 <?php
 
-namespace atom\cms\models;
+namespace atom\cms\forms;
 
+use atom\cms\models\User;
 use yii\base\Model;
 
 class UserPasswordForm extends Model

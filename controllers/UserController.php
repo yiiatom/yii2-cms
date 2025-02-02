@@ -4,18 +4,19 @@ namespace atom\cms\controllers;
 
 use Yii;
 use atom\BackendController;
+use atom\cms\filters\UserFilter;
+use atom\cms\forms\UserForm;
+use atom\cms\forms\UserPasswordForm;
 use atom\cms\models\User;
-use atom\cms\models\UserForm;
-use atom\cms\models\UserPasswordForm;
 use yii\web\BadRequestHttpException;
 
 class UserController extends BackendController
 {
     public function actionIndex()
     {
-        $model = new User;
+        $filter = new UserFilter;
         return $this->render('index', [
-            'model' => $model,
+            'filter' => $filter,
         ]);
     }
 
