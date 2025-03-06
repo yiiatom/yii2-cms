@@ -19,20 +19,6 @@ class Module extends \yii\base\Module
         // Check console
         $isConsole = Yii::$app instanceof \yii\console\Application;
 
-        // Modules
-        // $modules = [];
-        // foreach (glob(Yii::getAlias('@app/modules') . '/*') as $dir) {
-        //     if (file_exists("{$dir}/BackendModule.php")) {
-        //         $name = basename($dir);
-        //         $module = ['class' => "app\\modules\\{$name}\\BackendModule"];
-        //         if ($isConsole) {
-        //             $module['controllerNamespace'] = "app\\modules\\{$name}\\commands";
-        //         }
-        //         $modules[$name] = $module;
-        //     }
-        // }
-        // $this->modules = $modules;
-
         // Application
         if (!$isConsole) {
             $this->initApplication();
@@ -107,31 +93,26 @@ class Module extends \yii\base\Module
     public function getMenuItems()
     {
         $items = [
-            [
+            'dashboard' => [
                 'icon' => '<i class="menu-icon fa-solid fa-gauge-high"></i>',
                 'label' => 'Dashboard',
                 'url' => ["/{$this->id}/default/index"],
             ],
-            [
+            'media-library' => [
                 'icon' => '<i class="menu-icon fa-solid fa-images"></i>',
                 'label' => 'Media library',
                 'url' => ["/{$this->id}/media-library/index"],
             ],
-            [
+            'users' => [
                 'icon' => '<i class="menu-icon fa-solid fa-user"></i>',
                 'label' => 'Users',
                 'url' => ["/{$this->id}/user/index"],
             ],
-            [
+            'notifications' => [
                 'icon' => '<i class="menu-icon fa-solid fa-envelope"></i>',
                 'label' => 'Notifications',
                 'url' => ["/{$this->id}/notification/index"],
             ],
-            // [
-            //     'icon' => '<i class="menu-icon fa-solid fa-puzzle-piece"></i>',
-            //     'label' => 'Modules',
-            //     'url' => '#',
-            // ],
             // [
             //     'icon' => '<i class="menu-icon fa-solid fa-cart-shopping"></i>',
             //     'label' => 'E-commerce',
