@@ -9,7 +9,8 @@ $this->params['breadcrumbs'] = [
 ];
 
 ?>
-<h1><?= Html::encode($this->title) ?></h1>
+<h1><?= Html::encode($this->title); ?></h1>
+
 <?= $this->render('form', [
     'model' => $model,
-]) ?>
+]); ?>

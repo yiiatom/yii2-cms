@@ -6,8 +6,9 @@ use Yii;
 use yii\data\ActiveDataProvider;
 use yii\db\ActiveRecord;
 use yii\db\ActiveQueryInterface;
+use yii\web\IdentityInterface;
 
-class User extends ActiveRecord implements \yii\web\IdentityInterface
+class User extends ActiveRecord implements IdentityInterface
 {
     public static function tableName()
     {
